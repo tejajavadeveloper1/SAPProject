@@ -1,10 +1,13 @@
  package com.example.demo.model;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "policies")
+@Transactional
 public class Policy {
 
     @Id
@@ -15,7 +18,7 @@ public class Policy {
     private String name;
 
     @Version
-    private Integer version=0; // Add this field for optimistic locking
+    private Integer version; // Add this field for optimistic locking
 
     // Getters and Setters for practise
     public Long getId() { return id; }
