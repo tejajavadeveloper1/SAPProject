@@ -17,7 +17,7 @@ public class Policy {
     @Version
     private Integer version=0; // Add this field for optimistic locking
 
-    // Getters and Setters
+    // Getters and Setters for practise
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getName() { return name; }
