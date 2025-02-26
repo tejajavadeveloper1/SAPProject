@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Policy Manager</title>
+    <script src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js"
+            id="sap-ui-bootstrap"
+            data-sap-ui-theme="sap_fiori_3"
+            data-sap-ui-libs="sap.m"
+            data-sap-ui-bindingSyntax="complex">
+    </script>
+    <script>
+        sap.ui.getCore().attachInit(function () {
+            const oModel = new sap.ui.model.json.JSONModel();
+            oModel.loadData("/api/policies");
+            sap.ui.getCore().setModel(oModel);
+
+            const oList = new sap.m.List({
+                items: {
+                    path: "/",
+                    template: new sap.m.StandardListItem({
+                        title: "{name}",
+                        type: "Active",
+                        press: function(oEvent) {
+                            const oContext = oEvent.getSource().getBindingContext();
+                            const policyId = oContext.getProperty("id");
+                            alert("Policy ID: " + policyId);
+                        }
+                    })
+                }
+            });
+
+            new sap.m.App({
+                pages: [
+                    new sap.m.Page({
+                        title: "Policy Manager",
+                        content: [oList]
+                    })
+                ]
+            }).placeAt("content");
+        });
+    </script>
+</head>
+<body class="sapUiBody" id="content"></body>
+</html>
